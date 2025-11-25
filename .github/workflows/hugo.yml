@@ -24,6 +24,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: 0.128.0
+
     steps:
       - name: Install Hugo CLI
         run: |
@@ -45,12 +46,18 @@ jobs:
       - name: Install Node.js dependencies
         run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
 
-      # ➕ Step indispensable pour PaperMod (Hugo Modules)
-      - name: Hugo Modules
+      # -------------------------------------------------------
+      # 🎯 Fix PaperMod : Fetch Hugo Modules properly
+      # -------------------------------------------------------
+      - name: Setup Hugo Modules
         run: |
-          hugo mod get
+          hugo mod init waelgharbi.github.io || true
+          hugo mod get github.com/adityatelange/hugo-PaperMod
           hugo mod tidy
 
+      # -------------------------------------------------------
+      # 🚀 Build the Hugo website
+      # -------------------------------------------------------
       - name: Build with Hugo
         env:
           HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
@@ -71,6 +78,7 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: build
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
