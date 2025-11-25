@@ -1,15 +1,17 @@
 baseURL = "https://waelgharbi.github.io/"
 languageCode = "fr-FR"
-title = "Wael Gharbi — Architecte | Revit Specialist"
-theme = "hugo-papermod"
-defaultContentLanguage = "fr"
-googleAnalytics = "G-K34S7R68LY"
+title = "Wael Gharbi — Portfolio"
+
+[module]
+  [[module.imports]]
+    path = "github.com/adityatelange/hugo-PaperMod"
 
 [params]
-  author = "Wael Gharbi"
-  description = "Architecte, Spécialiste Revit — Portfolio & Blog"
-  showDate = true
-  mainSections = ["projects","blog"]
+  defaultTheme = "auto"
+  ShowShareButtons = true
+  ShowReadingTime = true
+  ShowToc = true
+  googleAnalytics = "G-K34S7R68LY"
 
 [menu]
   [[menu.main]]
